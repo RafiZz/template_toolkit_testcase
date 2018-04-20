@@ -1,0 +1,32 @@
+<h3>[% list_name %]</h3>
+<div class="accordion" id="listAccordion">
+  [% FOREACH item IN list %]
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse[% item.id %]" 
+            aria-expanded="false" aria-controls="collapse[% item.id %]">
+          [% item.name %]
+        </button>
+      </h5>
+    </div>
+    <div id="collapse[% item.id %]" class="collapse" aria-labelledby="heading[% item.id %]" data-parent="#listAccordion">
+      <div class="card-body">
+        [% IF item.type == 'legal' %]
+            Юридическое лицо
+        [% ELSE %]
+            Физическое лицо
+        [% END %]
+        <ul>
+          [% FOREACH key IN item.keys.sort %]
+             <li>[% key %]: [% item.$key %]</li>
+          [% END %]
+        </ul>
+        <button data-item-id="[% item.id %]" class="editItemBtn btn btn-info">
+            Редактировать
+        </button>
+      </div>
+    </div>
+  </div>
+  [% END %]
+</div>

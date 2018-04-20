@@ -1,0 +1,4 @@
+[% WRAPPER base.tt %]
+  <h1>[% status %]</h1>
+  <h2>[% text %]</h2>
+[% END %]

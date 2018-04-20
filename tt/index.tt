@@ -1,0 +1,3 @@
+[% WRAPPER base.tt %]
+  <h3>Главная</h3>
+[% END %]

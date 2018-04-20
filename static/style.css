@@ -1,0 +1,13 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+.mynavbar {
+  border-bottom: 1px solid darkgray;
+}
+
+.myfooter {
+  margin-top: auto;
+  border-top: 1px solid darkgray;
+}

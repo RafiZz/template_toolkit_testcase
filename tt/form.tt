@@ -1,0 +1,79 @@
+[% IF form_name %]
+   <h3>[% form_name %]</h3>
+[% END %]
+[% IF form_msg %]
+   <h4>[% form_msg %]</h4>
+[% END %]
+<form id="itemForm" action="/save" method="post">
+  [% IF item %]
+    <div class="form-group">
+      <label for="id">ID</label>
+      <input type="number" class="form-control" name="id" id="id" aria-describedby="idHelp" value="[% item.id %]" required readonly disabled >
+      <small id="idHelp" class="form-text text-muted">Вы не можете изменить ID</small>
+    </div>
+  [% END %]
+  <div class="form-group">
+    <div class="form-check">
+      <input type="radio" class="form-check-input" name="type" id="typeLegal" value="legal" required
+        [% IF item.type == 'legal' -%]
+          checked
+        [% END %]
+      >
+      <label class="form-check-label" for="typeLegal">Юридическое лицо</label>
+    </div>
+    <div class="form-check">
+      <input type="radio" class="form-check-input" name="type" id="typeNatural" value="natural"
+        [% IF item.type == 'natural' -%]
+          checked
+        [% END %]
+      >
+      <label class="form-check-label" for="typeNatural">Физическое лицо</label>
+    </div>
+  </div>
+
+  <div id="naturalTypeFields"
+    [% IF item.type != 'natural' -%]
+      hidden
+    [% END %]
+  >
+    <div class="form-group">
+      <label for="naturalName">Name</label>
+      <input type="text" class="form-control" name="name" id="naturalName" aria-describedby="naturalNameHelp" value="[% item.name %]" required >
+      <small id="naturalNameHelp" class="form-text text-muted">ФИО</small>
+    </div>
+    <div class="form-group">
+      <label for="naturalInn">INN</label>
+      <input type="text" class="form-control" name="inn" id="naturalInn" aria-describedby="naturalInnHelp" value="[% item.inn %]" required >
+      <small id="naturalInnHelp" class="form-text text-muted">ИНН физического лица</small>
+    </div>
+  </div>
+
+  <div id="legalTypeFields"
+    [% IF item.type != 'legal' -%]
+      hidden
+    [% END %]
+  >
+    <div class="form-group">
+      <label for="legalName">Name</label>
+      <input type="text" class="form-control" name="name" id="legalName" aria-describedby="legalNameHelp" value="[% item.name %]" required >
+      <small id="legalNameHelp" class="form-text text-muted">Наименование организации</small>
+    </div>
+    <div class="form-group">
+      <label for="legalInn">INN</label>
+      <input type="text" class="form-control" name="inn" id="legalInn" aria-describedby="legalInnHelp" value="[% item.inn %]" required >
+      <small id="legalInnHelp" class="form-text text-muted">ИНН юридического лица</small>
+    </div>
+    <div class="form-group">
+      <label for="legalAddress">Address</label>
+      <input type="text" class="form-control" name="address" id="legalAddress" aria-describedby="legalAddressHelp" value="[% item.address %]" required >
+      <small id="legalAddressHelp" class="form-text text-muted">Адрес организации</small>
+    </div>
+  </div>
+  
+  [% IF item %]
+    <button type="submit" class="btn btn-primary">Сохранить измения</button>
+    <button type="button" id="deleteItemBtn" class="btn btn-danger">Удалить</button>
+  [% ELSE %]
+    <button type="submit" class="btn btn-success">Сохранить элемент</button>
+  [% END %]
+</form>
